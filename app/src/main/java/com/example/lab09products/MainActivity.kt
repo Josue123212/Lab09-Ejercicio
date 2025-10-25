@@ -13,35 +13,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.lab09products.ui.theme.Lab09ProductsTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            Lab09ProductsTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }
-    }
-}
-
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
+fun MainApp() {
+    val retrofit = Retrofit.Builder()
+        .baseUrl("https://dummyjson.com/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    val servicio = retrofit.create(ProductApiService::class.java)
+    val navController = rememberNavController()
+
+    Scaffold(
+        topBar = { TopBar() },
+        content = { padding -> Content(padding, navController, servicio) }
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Lab09ProductsTheme {
-        Greeting("Android")
-    }
 }
