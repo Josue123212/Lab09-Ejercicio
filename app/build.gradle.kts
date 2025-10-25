@@ -40,7 +40,7 @@ android {
 }
 
 dependencies {
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
+    // implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6") // duplicado, se usa libs.androidx.lifecycle.runtime.ktx
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
